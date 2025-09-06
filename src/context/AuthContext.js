@@ -38,7 +38,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const signup = (email, password, name, userType = 'client') => {
+  const signup = (email, password, name, userType = 'client', services = null) => {
     // Get stored users
     const storedUsers = JSON.parse(localStorage.getItem('eventconnect_users') || '[]');
     
@@ -55,6 +55,10 @@ export const AuthProvider = ({ children }) => {
       password, // Store password for login
       name,
       userType,
+      services: services ? [services] : [],
+      specialty: services || 'Event Professional',
+      rating: 4.5,
+      verified: false,
       createdAt: new Date().toISOString()
     };
     

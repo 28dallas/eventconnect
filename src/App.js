@@ -10,6 +10,7 @@ import Browse from './pages/Browse';
 import Contact from './pages/Contact';
 import Profile from './pages/Profile';
 import Checkout from './pages/Checkout';
+import ProfessionalSetup from './pages/ProfessionalSetup';
 import ProtectedRoute from './components/ProtectedRoute';
 import './index.css';
 
@@ -28,6 +29,11 @@ function App() {
             <Route path="/checkout" element={
               <ProtectedRoute>
                 <Checkout />
+              </ProtectedRoute>
+            } />
+            <Route path="/professional-setup" element={
+              <ProtectedRoute>
+                <ProfessionalSetup />
               </ProtectedRoute>
             } />
             <Route path="/dashboard" element={

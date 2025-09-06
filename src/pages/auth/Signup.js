@@ -33,9 +33,13 @@ const Signup = () => {
       return;
     }
 
-    const result = signup(formData.email, formData.password, formData.name, formData.userType);
+    const result = signup(formData.email, formData.password, formData.name, formData.userType, formData.services);
     if (result.success) {
-      navigate(result.user.userType === 'professional' ? '/dashboard' : '/');
+      if (result.user.userType === 'professional') {
+        navigate('/professional-setup');
+      } else {
+        navigate('/');
+      }
     } else {
       setError(result.error);
     }
@@ -85,6 +89,29 @@ const Signup = () => {
                 </label>
               </div>
             </div>
+
+            {formData.userType === 'professional' && (
+              <div>
+                <label className="block text-sm font-medium text-gray-700">
+                  Primary Service Category
+                </label>
+                <select
+                  value={formData.services || ''}
+                  onChange={(e) => setFormData({...formData, services: e.target.value})}
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                  required
+                >
+                  <option value="">Select your service category</option>
+                  <option value="photography">Photography</option>
+                  <option value="planning">Event Planning</option>
+                  <option value="catering">Catering</option>
+                  <option value="music">Music & DJ</option>
+                  <option value="decoration">Decoration</option>
+                  <option value="venue">Venues</option>
+                  <option value="producer">Producer</option>
+                </select>
+              </div>
+            )}
 
             <div>
               <label className="block text-sm font-medium text-gray-700">

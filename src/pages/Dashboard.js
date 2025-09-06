@@ -1,13 +1,20 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 const Dashboard = () => {
   const { user, logout } = useAuth();
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     logout();
   };
+
+  useEffect(() => {
+    if (user?.userType === 'professional' && !user?.setupComplete) {
+      navigate('/professional-setup');
+    }
+  }, [user, navigate]);
 
   return (
     <div className="min-h-screen section-bg">

@@ -1,130 +1,49 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 const Browse = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [professionals, setProfessionals] = useState([]);
 
   const categories = [
     { id: 'all', name: 'All Categories' },
-    { id: 'photography', name: 'Photography' },
-    { id: 'planning', name: 'Event Planning' },
-    { id: 'catering', name: 'Catering' },
-    { id: 'music', name: 'Music & DJ' },
-    { id: 'decoration', name: 'Decoration' },
-    { id: 'venue', name: 'Venues' }
+    { id: 'photographer', name: 'Photography' },
+    { id: 'videographer', name: 'Videography' },
+    { id: 'dj', name: 'DJ' },
+    { id: 'producer', name: 'Producer' },
+    { id: 'web designer', name: 'Web Design' },
+    { id: 'event planner', name: 'Event Planning' },
+    { id: 'caterer', name: 'Catering' },
+    { id: 'decorator', name: 'Decoration' },
+    { id: 'venue coordinator', name: 'Venue Coordination' }
   ];
 
-  const professionals = [
-    {
-      id: 1,
-      name: 'Sarah Johnson',
-      category: 'photography',
-      rating: 4.9,
-      reviews: 127,
-      price: '$150/hour',
-      location: 'New York, NY',
-      specialty: 'Wedding Photography',
-      verified: true,
-      image: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=300&h=300&fit=crop&crop=face'
-    },
-    {
-      id: 2,
-      name: 'Michael Chen',
-      category: 'planning',
-      rating: 4.8,
-      reviews: 89,
-      price: '$200/event',
-      location: 'Los Angeles, CA',
-      specialty: 'Corporate Events',
-      verified: true,
-      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face'
-    },
-    {
-      id: 3,
-      name: 'Emily Rodriguez',
-      category: 'catering',
-      rating: 4.7,
-      reviews: 156,
-      price: '$25/person',
-      location: 'Chicago, IL',
-      specialty: 'Gourmet Catering',
-      verified: true,
-      image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&h=300&fit=crop&crop=face'
-    },
-    {
-      id: 4,
-      name: 'David Martinez',
-      category: 'music',
-      rating: 4.9,
-      reviews: 203,
-      price: '$300/event',
-      location: 'Miami, FL',
-      specialty: 'Wedding DJ & MC',
-      verified: true,
-      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face'
-    },
-    {
-      id: 5,
-      name: 'Jessica Park',
-      category: 'decoration',
-      rating: 4.6,
-      reviews: 94,
-      price: '$400/event',
-      location: 'Seattle, WA',
-      specialty: 'Floral Design',
-      verified: false,
-      image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=300&fit=crop&crop=face'
-    },
-    {
-      id: 6,
-      name: 'Robert Wilson',
-      category: 'venue',
-      rating: 4.8,
-      reviews: 167,
-      price: '$500/day',
-      location: 'Austin, TX',
-      specialty: 'Outdoor Venues',
-      verified: true,
-      image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=300&h=300&fit=crop&crop=face'
-    },
-    {
-      id: 7,
-      name: 'Amanda Thompson',
-      category: 'photography',
-      rating: 4.7,
-      reviews: 142,
-      price: '$180/hour',
-      location: 'Portland, OR',
-      specialty: 'Portrait Photography',
-      verified: true,
-      image: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=300&h=300&fit=crop&crop=face'
-    },
-    {
-      id: 8,
-      name: 'Carlos Mendez',
-      category: 'catering',
-      rating: 4.9,
-      reviews: 189,
-      price: '$30/person',
-      location: 'San Diego, CA',
-      specialty: 'Mexican Cuisine',
-      verified: true,
-      image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face'
-    },
-    {
-      id: 9,
-      name: 'Lisa Chang',
-      category: 'planning',
-      rating: 4.8,
-      reviews: 76,
-      price: '$250/event',
-      location: 'Boston, MA',
-      specialty: 'Birthday Parties',
-      verified: false,
-      image: 'https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?w=300&h=300&fit=crop&crop=face'
-    }
-  ];
+  useEffect(() => {
+    // Get all registered users who are professionals
+    const storedUsers = JSON.parse(localStorage.getItem('eventconnect_users') || '[]');
+    const professionalUsers = storedUsers.filter(user => user.userType === 'professional');
+    
+    // Transform user data to professional format
+    const formattedProfessionals = professionalUsers.map(user => ({
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      category: user.services?.[0] || 'general',
+      rating: user.rating || 4.5,
+      reviews: user.reviews || Math.floor(Math.random() * 100) + 10,
+      price: user.pricing || 'Contact for pricing',
+      location: user.location || 'Location not specified',
+      specialty: user.specialty || user.services?.[0] || 'Event Professional',
+      verified: user.verified || false,
+      bio: user.bio || 'Professional event service provider',
+      phone: user.phone,
+      portfolio: user.portfolio || [],
+      image: user.profileImage || 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face'
+    }));
+    
+    setProfessionals(formattedProfessionals);
+  }, []);
 
   const filteredProfessionals = professionals.filter(prof => {
     const matchesCategory = selectedCategory === 'all' || prof.category === selectedCategory;
@@ -233,6 +152,7 @@ const Browse = () => {
                   {professional.name}
                 </h3>
                 <p className="text-blue-600 font-medium mb-1 capitalize">{professional.category}</p>
+                <p className="text-gray-600 mb-2 text-sm">{professional.bio}</p>
                 <p className="text-gray-600 mb-4 flex items-center">
                   <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -253,13 +173,30 @@ const Browse = () => {
                   </span>
                 </div>
                 
-                <div className="flex justify-between items-center">
-                  <span className="text-xl font-bold text-green-600">
+                <div className="flex justify-between items-center mb-3">
+                  <span className="text-lg font-bold text-green-600">
                     {professional.price}
                   </span>
-                  <button className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-6 py-2 rounded-lg font-medium transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
-                    Contact
-                  </button>
+                  <div className="text-sm text-gray-500">
+                    {professional.portfolio?.length || 0} projects
+                  </div>
+                </div>
+                
+                <div className="flex space-x-2">
+                  <a 
+                    href={`mailto:${professional.email}`}
+                    className="flex-1 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white py-2 px-4 rounded-lg font-medium transition-all duration-300 text-center text-sm"
+                  >
+                    Email
+                  </a>
+                  {professional.phone && (
+                    <a 
+                      href={`tel:${professional.phone}`}
+                      className="flex-1 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg font-medium transition-all duration-300 text-center text-sm"
+                    >
+                      Call
+                    </a>
+                  )}
                 </div>
               </div>
             </div>
@@ -272,13 +209,27 @@ const Browse = () => {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
             <h3 className="text-xl font-semibold text-gray-900 mb-2">No professionals found</h3>
-            <p className="text-gray-500 mb-4">Try adjusting your search criteria or browse all categories.</p>
-            <button 
-              onClick={() => {setSearchTerm(''); setSelectedCategory('all');}}
-              className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors"
-            >
-              Clear Filters
-            </button>
+            <p className="text-gray-500 mb-4">
+              {professionals.length === 0 
+                ? 'No professionals have registered yet. Be the first to join!' 
+                : 'Try adjusting your search criteria or browse all categories.'}
+            </p>
+            <div className="space-x-4">
+              {professionals.length > 0 && (
+                <button 
+                  onClick={() => {setSearchTerm(''); setSelectedCategory('all');}}
+                  className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+                >
+                  Clear Filters
+                </button>
+              )}
+              <Link 
+                to="/signup" 
+                className="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition-colors inline-block"
+              >
+                Join as Professional
+              </Link>
+            </div>
           </div>
         )}
       </div>
