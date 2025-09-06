@@ -37,10 +37,10 @@ const Navbar = () => {
               <Link to="/browse" className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors">
                 Browse Professionals
               </Link>
-              <a href="#services" className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors">
+              <a href="/#services" className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors">
                 Services
               </a>
-              <a href="#how-it-works" className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors">
+              <a href="/#how-it-works" className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors">
                 How it Works
               </a>
             </div>
@@ -97,10 +97,10 @@ const Navbar = () => {
               <Link to="/browse" className="text-gray-700 hover:text-blue-600 block px-3 py-2 text-base font-medium">
                 Browse Professionals
               </Link>
-              <a href="#services" className="text-gray-700 hover:text-blue-600 block px-3 py-2 text-base font-medium">
+              <a href="/#services" className="text-gray-700 hover:text-blue-600 block px-3 py-2 text-base font-medium">
                 Services
               </a>
-              <a href="#how-it-works" className="text-gray-700 hover:text-blue-600 block px-3 py-2 text-base font-medium">
+              <a href="/#how-it-works" className="text-gray-700 hover:text-blue-600 block px-3 py-2 text-base font-medium">
                 How it Works
               </a>
               <div className="pt-4 pb-3 border-t border-gray-200">
