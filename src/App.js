@@ -8,6 +8,8 @@ import Signup from './pages/auth/Signup';
 import Dashboard from './pages/Dashboard';
 import Browse from './pages/Browse';
 import Contact from './pages/Contact';
+import Profile from './pages/Profile';
+import Checkout from './pages/Checkout';
 import ProtectedRoute from './components/ProtectedRoute';
 import './index.css';
 
@@ -23,9 +25,19 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/browse" element={<Browse />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/checkout" element={
+              <ProtectedRoute>
+                <Checkout />
+              </ProtectedRoute>
+            } />
             <Route path="/dashboard" element={
               <ProtectedRoute>
                 <Dashboard />
+              </ProtectedRoute>
+            } />
+            <Route path="/profile" element={
+              <ProtectedRoute>
+                <Profile />
               </ProtectedRoute>
             } />
           </Routes>

@@ -170,7 +170,8 @@ const SubscriptionPlans = () => {
               </ul>
               
               <Link 
-                to="/signup"
+                to={plan.name === 'Enterprise' ? '/contact' : '/checkout'}
+                state={{ plan, isAnnual }}
                 className={`w-full py-4 px-6 rounded-xl font-semibold text-center transition-all duration-300 block ${
                   plan.popular 
                     ? 'bg-white text-blue-600 hover:bg-blue-50 shadow-lg hover:shadow-xl' 

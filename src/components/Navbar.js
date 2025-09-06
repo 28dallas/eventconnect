@@ -43,7 +43,9 @@ const Navbar = () => {
             <div className="ml-4 flex items-center space-x-4">
               {user ? (
                 <>
-                  <span className="text-gray-700 text-sm">Welcome, {user.name}</span>
+                  <Link to="/profile" className="text-gray-700 hover:text-blue-600 px-4 py-2 text-sm font-medium transition-colors">
+                    Profile
+                  </Link>
                   <Link to="/dashboard" className="text-gray-700 hover:text-blue-600 px-4 py-2 text-sm font-medium transition-colors">
                     Dashboard
                   </Link>
@@ -96,7 +98,9 @@ const Navbar = () => {
               <div className="pt-4 pb-3 border-t border-gray-200">
                 {user ? (
                   <>
-                    <span className="text-gray-700 block px-3 py-2 text-base font-medium">Welcome, {user.name}</span>
+                    <Link to="/profile" className="text-gray-700 hover:text-blue-600 block px-3 py-2 text-base font-medium">
+                      Profile
+                    </Link>
                     <Link to="/dashboard" className="text-gray-700 hover:text-blue-600 block px-3 py-2 text-base font-medium">
                       Dashboard
                     </Link>

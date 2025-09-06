@@ -73,11 +73,25 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('eventconnect_user');
   };
 
+  const updateProfile = (profileData) => {
+    const updatedUser = { ...user, ...profileData };
+    setUser(updatedUser);
+    localStorage.setItem('eventconnect_user', JSON.stringify(updatedUser));
+    
+    // Update in users array
+    const storedUsers = JSON.parse(localStorage.getItem('eventconnect_users') || '[]');
+    const updatedUsers = storedUsers.map(u => 
+      u.id === user.id ? updatedUser : u
+    );
+    localStorage.setItem('eventconnect_users', JSON.stringify(updatedUsers));
+  };
+
   const value = {
     user,
     login,
     signup,
     logout,
+    updateProfile,
     loading
   };
 
