@@ -23,7 +23,9 @@ const Login = () => {
 
     const result = login(formData.email, formData.password, formData.userType);
     if (result.success) {
-      navigate(formData.userType === 'professional' ? '/dashboard' : '/');
+      navigate(result.user.userType === 'professional' ? '/dashboard' : '/');
+    } else {
+      setError(result.error);
     }
   };
 

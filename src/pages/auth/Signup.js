@@ -35,7 +35,9 @@ const Signup = () => {
 
     const result = signup(formData.email, formData.password, formData.name, formData.userType);
     if (result.success) {
-      navigate(formData.userType === 'professional' ? '/dashboard' : '/');
+      navigate(result.user.userType === 'professional' ? '/dashboard' : '/');
+    } else {
+      setError(result.error);
     }
   };
 
