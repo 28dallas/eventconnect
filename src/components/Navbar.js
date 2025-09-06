@@ -18,8 +18,16 @@ const Navbar = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <Link to="/" className="text-2xl font-bold text-blue-600 hover:text-blue-700">
-              EventConnect
+            <Link to="/" className="flex items-center space-x-2 hover:opacity-80 transition-opacity">
+              <div className="relative">
+                <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg flex items-center justify-center shadow-lg">
+                  <span className="text-white font-bold text-lg">E</span>
+                </div>
+                <div className="absolute -right-2 -bottom-1 w-6 h-6 bg-gradient-to-br from-orange-500 to-red-500 rounded-md flex items-center justify-center shadow-md">
+                  <span className="text-white font-bold text-xs">C</span>
+                </div>
+              </div>
+              <span className="text-2xl font-bold text-blue-600">EventConnect</span>
             </Link>
           </div>
 
